@@ -24,11 +24,25 @@
                         </h3>
 
                         <div class="space-y-10">
+                            <!-- Floating Label Input: Custom ID (Read Only) -->
+                            <div class="relative group/input opacity-80 cursor-not-allowed">
+                                <label class="absolute -top-3.5 left-6 bg-slate-950 px-2 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Protocol ID (Autoshow)</label>
+                                <input type="text" value="{{ $customId }}" readonly 
+                                    class="w-full bg-black/60 border border-indigo-500/20 rounded-[2rem] py-5 px-8 text-indigo-400 text-lg font-black outline-none cursor-not-allowed italic">
+                            </div>
+
                             <!-- Floating Label Input: Name -->
                             <div class="relative group/input">
                                 <label class="absolute -top-3.5 left-6 bg-slate-950 px-2 text-[10px] font-black text-slate-500 uppercase tracking-widest transition-all group-focus-within/input:text-indigo-400">Legal Full Name</label>
                                 <input type="text" name="name" required placeholder="Alexander Pierce Enterprise" 
                                     class="w-full bg-black/40 border border-white/5 rounded-[2rem] py-5 px-8 text-white text-lg font-bold outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500/50 transition-all">
+                            </div>
+
+                            <!-- Floating Label Input: Address -->
+                            <div class="relative group/input">
+                                <label class="absolute -top-3.5 left-6 bg-slate-950 px-2 text-[10px] font-black text-slate-500 uppercase tracking-widest transition-all group-focus-within/input:text-indigo-400">Institutional Address</label>
+                                <textarea name="address" required placeholder="Industrial Hub, Sector 4, Executive Plaza" rows="2"
+                                    class="w-full bg-black/40 border border-white/5 rounded-[2rem] py-5 px-8 text-white font-bold outline-none focus:ring-1 focus:ring-indigo-500 transition-all resize-none"></textarea>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -43,6 +57,21 @@
                                     <label class="absolute -top-3.5 left-6 bg-slate-950 px-2 text-[10px] font-black text-slate-500 uppercase tracking-widest">Relay Number</label>
                                     <input type="text" name="phone" required placeholder="+91 XXXXX XXXXX" 
                                         class="w-full bg-black/40 border border-white/5 rounded-[2rem] py-5 px-8 text-white font-bold outline-none focus:ring-1 focus:ring-indigo-500 transition-all">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                <!-- Aadhaar -->
+                                <div class="relative group/input">
+                                    <label class="absolute -top-3.5 left-6 bg-slate-950 px-2 text-[10px] font-black text-rose-400 uppercase tracking-widest transition-all group-focus-within/input:text-rose-400">Aadhaar Matrix ID</label>
+                                    <input type="text" name="aadhaar_no" required maxlength="12" placeholder="XXXX XXXX XXXX" 
+                                        class="w-full bg-black/40 border border-white/5 rounded-[2rem] py-5 px-8 text-white font-bold outline-none focus:ring-1 focus:ring-rose-500/50 transition-all">
+                                </div>
+                                <!-- PAN -->
+                                <div class="relative group/input">
+                                    <label class="absolute -top-3.5 left-6 bg-slate-950 px-2 text-[10px] font-black text-amber-400 uppercase tracking-widest transition-all group-focus-within/input:text-amber-400">PAN Protocol</label>
+                                    <input type="text" name="pan_no" required maxlength="10" placeholder="ABCDE1234F" 
+                                        class="w-full bg-black/40 border border-white/5 rounded-[2rem] py-5 px-8 text-white font-bold outline-none focus:ring-1 focus:ring-amber-500/50 transition-all uppercase">
                                 </div>
                             </div>
                         </div>

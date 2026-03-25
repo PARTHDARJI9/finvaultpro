@@ -113,26 +113,42 @@
             </div>
 
             <!-- Mobile Bottom Navigation (Fixed) -->
-            <div class="lg:hidden fixed bottom-0 left-0 w-full h-20 px-6 bg-slate-900 border-t border-white/5 backdrop-blur-2xl z-50 flex items-center justify-between shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
-                <a href="{{ route('dashboard') }}" class="flex flex-col items-center space-y-1 transition-all {{ request()->routeIs('dashboard') ? 'text-indigo-400 scale-110' : 'text-slate-500 hover:text-white' }}">
-                    <i class="fas fa-house text-lg"></i>
-                    <span class="text-[8px] font-black uppercase tracking-widest">Dash</span>
+            <div class="lg:hidden fixed bottom-0 left-0 w-full h-[72px] bg-slate-950/90 backdrop-blur-2xl border-t border-white/5 z-50 flex items-center justify-around px-4 shadow-[0_-15px_40px_rgba(0,0,0,0.8)] pb-safe">
+                <a href="{{ route('dashboard') }}" class="relative flex flex-col items-center justify-center w-16 h-full transition-all {{ request()->routeIs('dashboard') ? 'text-indigo-400' : 'text-slate-600 hover:text-white' }} active:scale-90 overflow-hidden">
+                    <i class="fas fa-house text-xl mb-1 relative z-10 transition-transform"></i>
+                    <span class="text-[8px] font-black uppercase tracking-widest relative z-10">Dash</span>
+                    @if(request()->routeIs('dashboard'))
+                        <div class="absolute inset-x-0 bottom-0 h-1 bg-indigo-500 rounded-t-full shadow-[0_-5px_15px_rgba(99,102,241,0.5)]"></div>
+                        <div class="absolute inset-0 bg-indigo-500/5 blur-xl"></div>
+                    @endif
                 </a>
-                <a href="{{ route('clients.index') }}" class="flex flex-col items-center space-y-1 transition-all {{ request()->routeIs('clients.*') ? 'text-indigo-400 scale-110' : 'text-slate-500 hover:text-white' }}">
-                    <i class="fas fa-user-group text-lg"></i>
-                    <span class="text-[8px] font-black uppercase tracking-widest">Clients</span>
+                <a href="{{ route('clients.index') }}" class="relative flex flex-col items-center justify-center w-16 h-full transition-all {{ request()->routeIs('clients.*') ? 'text-indigo-400' : 'text-slate-600 hover:text-white' }} active:scale-90 overflow-hidden">
+                    <i class="fas fa-user-group text-xl mb-1 relative z-10 transition-transform"></i>
+                    <span class="text-[8px] font-black uppercase tracking-widest relative z-10">Clients</span>
+                    @if(request()->routeIs('clients.*'))
+                        <div class="absolute inset-x-0 bottom-0 h-1 bg-indigo-500 rounded-t-full shadow-[0_-5px_15px_rgba(99,102,241,0.5)]"></div>
+                        <div class="absolute inset-0 bg-indigo-500/5 blur-xl"></div>
+                    @endif
                 </a>
-                <a href="{{ route('loans.index') }}" class="flex flex-col items-center space-y-1 transition-all {{ request()->routeIs('loans.*') ? 'text-indigo-400 scale-110' : 'text-slate-500 hover:text-white' }}">
-                    <i class="fas fa-hand-holding-dollar text-lg"></i>
-                    <span class="text-[8px] font-black uppercase tracking-widest">Loans</span>
+                <a href="{{ route('loans.index') }}" class="relative flex flex-col items-center justify-center w-16 h-full transition-all {{ request()->routeIs('loans.*') ? 'text-indigo-400' : 'text-slate-600 hover:text-white' }} active:scale-90 overflow-hidden">
+                    <i class="fas fa-hand-holding-dollar text-xl mb-1 relative z-10 transition-transform"></i>
+                    <span class="text-[8px] font-black uppercase tracking-widest relative z-10">Loans</span>
+                    @if(request()->routeIs('loans.*'))
+                        <div class="absolute inset-x-0 bottom-0 h-1 bg-indigo-500 rounded-t-full shadow-[0_-5px_15px_rgba(99,102,241,0.5)]"></div>
+                        <div class="absolute inset-0 bg-indigo-500/5 blur-xl"></div>
+                    @endif
                 </a>
-                <a href="{{ route('portfolio.index') }}" class="flex flex-col items-center space-y-1 transition-all {{ request()->routeIs('portfolio.*') ? 'text-indigo-400 scale-110' : 'text-slate-500 hover:text-white' }}">
-                    <i class="fas fa-chart-pie text-lg"></i>
-                    <span class="text-[8px] font-black uppercase tracking-widest">Assets</span>
+                <a href="{{ route('portfolio.index') }}" class="relative flex flex-col items-center justify-center w-16 h-full transition-all {{ request()->routeIs('portfolio.*') ? 'text-indigo-400' : 'text-slate-600 hover:text-white' }} active:scale-90 overflow-hidden">
+                    <i class="fas fa-chart-pie text-xl mb-1 relative z-10 transition-transform"></i>
+                    <span class="text-[8px] font-black uppercase tracking-widest relative z-10">Assets</span>
+                    @if(request()->routeIs('portfolio.*'))
+                        <div class="absolute inset-x-0 bottom-0 h-1 bg-indigo-500 rounded-t-full shadow-[0_-5px_15px_rgba(99,102,241,0.5)]"></div>
+                        <div class="absolute inset-0 bg-indigo-500/5 blur-xl"></div>
+                    @endif
                 </a>
-                <button @click="$dispatch('toggle-sidebar')" class="flex flex-col items-center space-y-1 text-slate-500 hover:text-white transition-all">
-                    <i class="fas fa-grip text-lg"></i>
-                    <span class="text-[8px] font-black uppercase tracking-widest">More</span>
+                <button @click="$dispatch('toggle-sidebar')" class="relative flex flex-col items-center justify-center w-16 h-full text-slate-600 hover:text-white active:scale-90 overflow-hidden">
+                    <i class="fas fa-grip text-xl mb-1 relative z-10 transition-transform"></i>
+                    <span class="text-[8px] font-black uppercase tracking-widest relative z-10">More</span>
                 </button>
             </div>
         </div>

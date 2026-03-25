@@ -11,7 +11,7 @@ class Client extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'name', 'email', 'phone', 'aadhaar_no', 'pan_no', 
+        'user_id', 'custom_id', 'name', 'email', 'phone', 'aadhaar_no', 'pan_no', 
         'address', 'credit_score', 'total_borrowed', 'total_paid', 
         'balance', 'status', 'start_date', 'end_date', 'tenant_id'
     ];

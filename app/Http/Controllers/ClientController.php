@@ -16,7 +16,11 @@ class ClientController extends Controller
 
     public function create()
     {
-        return view('clients.create');
+        $lastClient = Client::latest()->first();
+        $nextIdNum = $lastClient ? ($lastClient->id + 1001) : 1001;
+        $customId = 'FIN-' . $nextIdNum;
+        
+        return view('clients.create', compact('customId'));
     }
 
     public function store(Request $request)
@@ -25,17 +29,29 @@ class ClientController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:clients,email',
             'phone' => 'required|string|max:20',
+            'aadhaar_no' => 'required|string|size:12',
+            'pan_no' => 'required|string|size:10',
+            'address' => 'required|string|max:1000',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
             'status' => 'required|in:active,pending,blocklisted',
             'documents.*' => 'nullable|file|mimes:pdf,jpg,png,jpeg|max:51200',
         ]);
 
+        $lastClient = Client::latest()->first();
+        $nextIdNum = $lastClient ? ($lastClient->id + 1001) : 1001;
+        $customId = 'FIN-' . $nextIdNum;
+
         $clientData = [
             'user_id' => Auth::id(),
+            'tenant_id' => Auth::user()->tenant_id ?? 1,
+            'custom_id' => $customId,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'aadhaar_no' => $request->aadhaar_no,
+            'pan_no' => $request->pan_no,
+            'address' => $request->address,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'status' => $request->status,

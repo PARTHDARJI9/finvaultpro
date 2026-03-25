@@ -78,7 +78,6 @@
             @foreach($navItems as $item)
                 @php $isActive = request()->routeIs($item['pattern'] ?? $item['route']); @endphp
                 <a href="{{ route($item['route']) }}" 
-                   @click="mobileOpen = false"
                    class="relative group/nav flex items-center justify-between py-4 px-6 rounded-2xl transition-all duration-300 {{ $isActive ? 'bg-indigo-600 text-white shadow-[0_15px_45px_rgba(79,70,229,0.35)] translate-x-1'  : 'text-slate-500 hover:bg-white/5 hover:text-slate-200 border border-transparent hover:border-white/5' }}">
                     <div class="flex items-center space-x-5 pointer-events-none">
                         <i class="fas fa-{{ $item['icon'] }} text-lg {{ $isActive ? 'text-white' : 'text-slate-600 group-hover/nav:text-indigo-400' }} transition-colors w-6 text-center"></i>
@@ -102,7 +101,6 @@
                 @foreach($controlItems as $item)
                     @php $isActive = request()->routeIs($item['route']); @endphp
                     <a href="{{ route($item['route']) }}" 
-                       @click="mobileOpen = false"
                        class="relative group/nav flex items-center py-4 px-6 rounded-2xl transition-all mb-4 {{ $isActive ? 'bg-white/10 text-white shadow-xl translate-x-1 border border-white/10' : 'text-slate-500 hover:bg-white/5 hover:text-slate-200 border border-transparent hover:border-white/10' }}">
                         <i class="fas fa-{{ $item['icon'] }} mr-5 {{ $isActive ? 'text-'.$item['color'].'-500' : 'text-slate-600 group-hover/nav:text-'.$item['color'].'-400' }} transition-colors text-lg w-6 text-center"></i>
                         <span class="font-black text-[11px] tracking-tight uppercase italic whitespace-nowrap">{{ $item['label'] }}</span>
@@ -112,7 +110,7 @@
         </nav>
 
         <!-- Institutional Signature Footer -->
-        <div class="p-8 shrink-0 bg-black/40 backdrop-blur-3xl border-t border-white/5 relative group/footer mt-auto h-[120px] flex items-center">
+        <div class="p-5 lg:p-8 shrink-0 bg-black/40 backdrop-blur-3xl border-t border-white/5 relative group/footer mt-auto h-[90px] lg:h-[120px] flex items-center mb-20 lg:mb-0">
             <div class="absolute inset-0 bg-gradient-to-t from-indigo-600/5 to-transparent pointer-events-none"></div>
             
             <div class="w-full relative bg-white/5 border border-white/5 rounded-[2.2rem] p-5 hover:bg-white/10 transition-all duration-500 shadow-2xl flex items-center justify-between">
