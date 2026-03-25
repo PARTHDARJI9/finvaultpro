@@ -1,0 +1,14 @@
+# Industrial Exclusions
+/node_modules
+/vendor
+/storage/*.key
+.env
+.git
+.gitignore
+.editorconfig
+.phpunit.result.cache
+docker-compose.yml
+Dockerfile
+phpunit.xml
+tests
+README.md
