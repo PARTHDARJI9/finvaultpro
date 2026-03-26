@@ -1,54 +1,34 @@
-# Executive-Grade Laravel 12 Runtime Terminal
-# ==========================================
-# Phase 1: Dependency Assembly (Build)
-# ==========================================
-FROM php:8.2-alpine as dependencies
+# Executive-Grade Laravel 12 Unified Docker Matrix (Single-Stage for Build Speed)
+FROM php:8.2-fpm-alpine
 
-# Global Logic: Composer Initialization
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Industrial System Dependencies
-# Node.js for Vite, Git for potential composer requirements
-RUN apk add --no-cache nodejs npm git
-
-WORKDIR /var/www
-
-# Logic: Transferring Application Core
-COPY . .
-
-# Execution: Production Lifecycle Build
-# Using --no-dev and --no-scripts for a lean production build
-RUN composer install --no-dev --optimize-autoloader --no-progress --no-interaction --no-scripts && \
-    npm install && \
-    npm run build
-
-# ==========================================
-# Phase 2: Production-Grade Runtime (Final)
-# ==========================================
-# Using FrankenPHP 1.1 with PHP 8.2 (Cloud-Native PHP Server)
-FROM dunglas/frankenphp:1.1-php8.2-alpine
-
-# Registering Infrastructure Metadata
-LABEL maintainer="FinVaultPro Engineering"
-LABEL description="Premium Laravel 12 Executive Terminal"
+# Global Logic: Environment Variables
+ENV APP_ENV=production
+ENV APP_DEBUG=false
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Industrial System Dependencies
-# Only runtime essentials (install-php-extensions handles extension dependencies)
+# Node.js for Vite, PHP build tools, and production essentials
 RUN apk add --no-cache \
-    libpng \
-    libxml2 \
+    curl \
+    git \
+    libpng-dev \
+    libxml2-dev \
     zip \
-    icu-libs \
-    libzip \
-    oniguruma \
-    ca-certificates \
-    curl
+    unzip \
+    icu-dev \
+    libzip-dev \
+    oniguruma-dev \
+    nodejs \
+    npm \
+    libavif-dev \
+    libwebp-dev \
+    libjpeg-turbo-dev \
+    freetype-dev
 
-# High-Velocity Extension Installer & Extension Orchestration
-ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
-
-RUN chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions \
+# Extensions: Core Protocol Orchestration
+# Installing directly (no multi-stage) to ensure all shared libraries are linked
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-avif && \
+    docker-php-ext-install \
     pdo_mysql \
     mbstring \
     exif \
@@ -58,35 +38,33 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     intl \
     zip
 
-# Environment Initialization
+# Global Logic: Composer Initialization
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 WORKDIR /var/www
 
-# Protocol: Copy Optimized Build and Dependencies
-# This includes the compiled front-end assets (public/build) and vendor folder
-COPY --from=dependencies /var/www /var/www
+# Logic: Transferring Application Core
+COPY . .
+
+# Execution: Production Lifecycle Build
+# Using --no-dev and --no-scripts for maximum stability
+RUN composer install --no-dev --optimize-autoloader --no-progress --no-interaction --no-scripts && \
+    npm install && \
+    npm run build && \
+    rm -rf node_modules
 
 # Registry: Identity Synchronization (Permissions)
-# Ensures storage and cache are writable by the web user
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && \
     chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 # Production Hardening
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# Render & Cloud Configuration
-# FrankenPHP automatically picks up PUBLIC_ROOT and SERVER_NAME
-ENV PORT=80
-ENV SERVER_NAME=:80
-ENV PUBLIC_ROOT=/var/www/public
-
-# Health Management Protocol
-# Using port 80 as internal default but Render will proxy
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:80/ || exit 1
-
-# Boot Protocol
-# FrankenPHP runs the PHP server natively on the specified port
+# Boot Protocol: Adaptive HTTP Gateway
+# We use 'php artisan serve' on port 80 to guarantee immediate HTTP visibility for Render's port scan
+# Render will map port 80 to the public URL.
 EXPOSE 80
 
-# The CMD here override the SERVER_NAME to use the injected $PORT if it exists
-CMD ["frankenphp", "php-server", "--listen", ":80", "--root", "/var/www/public"]
+# The CMD uses 'php artisan serve' to ensure it listens for HTTP traffic on port 80
+# We use --host 0.0.0.0 to listen on all interfaces and --port 80 for Render compatibility.
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
