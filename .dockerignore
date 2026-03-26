@@ -1,10 +1,12 @@
 # Industrial Exclusions
+# ==========================================
 /node_modules
 /vendor
 /storage/*.key
 .env
 .git
 .gitignore
+.gitattributes
 .editorconfig
 .phpunit.result.cache
 docker-compose.yml
@@ -12,3 +14,17 @@ Dockerfile
 phpunit.xml
 tests
 README.md
+.idea
+.vscode
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.docker-ignore
+storage/framework/cache/data/*
+storage/framework/views/*.php
+storage/framework/sessions/*
+storage/logs/*.log
+/public/hot
+/public/storage
+/public/build
+/auth.json
