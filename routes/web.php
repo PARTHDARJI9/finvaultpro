@@ -3,15 +3,17 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Redirect directly to the dashboard (No Login Needed)
 Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
+// Main Application: Public-Facing (Removed 'auth' and 'verified' middleware)
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+// All Core Modules (Removed 'auth' middleware for "Direct Open")
+Route::group([], function () {
     Route::resource('clients', App\Http\Controllers\ClientController::class);
     Route::resource('loans', App\Http\Controllers\LoanController::class);
     Route::get('/portfolio', [App\Http\Controllers\PortfolioController::class, 'index'])->name('portfolio.index');
@@ -26,4 +28,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+// Authentication Routes Removed as per directive
+// require __DIR__.'/auth.php';
