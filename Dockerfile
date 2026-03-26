@@ -11,7 +11,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN apk add --no-cache \
     curl \
     git \
-    libpng-dev \
+    libpng-dev \    
     libxml2-dev \
     zip \
     unzip \
