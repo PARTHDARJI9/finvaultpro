@@ -80,6 +80,7 @@ ENV SERVER_NAME=:80
 ENV PUBLIC_ROOT=/var/www/public
 
 # Health Management Protocol
+# Using port 80 as internal default but Render will proxy
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:80/ || exit 1
 
@@ -87,4 +88,5 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
 # FrankenPHP runs the PHP server natively on the specified port
 EXPOSE 80
 
-CMD ["frankenphp", "php-server", "--root", "/var/www/public"]
+# The CMD here override the SERVER_NAME to use the injected $PORT if it exists
+CMD ["frankenphp", "php-server", "--listen", ":80", "--root", "/var/www/public"]

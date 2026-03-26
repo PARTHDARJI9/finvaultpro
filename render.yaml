@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: finvaultpro-terminal
+    runtime: docker
+    plan: free # or your chosen plan
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: mysql # Update with your DB provider
+      - fromGroup: finvaultpro-db-creds # Link your RDS or Render DB config here
+    healthCheckPath: /
+    # Automatically uses the Dockerfile in the root
