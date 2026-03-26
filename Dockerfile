@@ -18,7 +18,7 @@ RUN apk add --no-cache \
     icu-dev \
     libzip-dev \
     oniguruma-dev \
-    nodejs \
+    nodejs \        
     npm \
     libavif-dev \
     libwebp-dev \
