@@ -5,6 +5,8 @@ FROM php:8.2-fpm-alpine
 ENV APP_ENV=production
 ENV APP_DEBUG=false
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV SESSION_DRIVER=file
+ENV CACHE_STORE=file
 
 # Industrial System Dependencies
 # Node.js for Vite, PHP build tools, and production essentials
