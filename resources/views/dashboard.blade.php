@@ -103,16 +103,16 @@
                     <div class="flex items-start space-x-6 group transition-all">
                         <div class="shrink-0 relative">
                             <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-white/10 flex items-center justify-center text-white font-black italic shadow-xl group-hover:scale-110 transition-transform">
-                                {{ strtoupper(substr($tx->client?->name ?? 'G', 0, 1)) }}
+                                {{ strtoupper(substr((string)($tx->client?->name ?? 'G'), 0, 1)) }}
                             </div>
                             <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-[3px] border-slate-950"></div>
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between mb-1">
-                                <p class="text-xs font-black text-white uppercase italic tracking-tighter truncate">{{ $tx->client?->name ?? 'Guest Client' }}</p>
+                                <p class="text-xs font-black text-white uppercase italic tracking-tighter truncate">{{ (string)($tx->client?->name ?? 'Guest Client') }}</p>
                                 <p class="text-xs font-black text-emerald-400 italic font-mono">+₹{{ number_format($tx->amount) }}</p>
                             </div>
-                            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-2">via <span class="text-indigo-400 underline decoration-indigo-400/20">{{ $tx->payment_method ?? 'Unknown' }}</span></p>
+                            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-2">via <span class="text-indigo-400 underline decoration-indigo-400/20">{{ (string)($tx->payment_method ?? 'Unknown') }}</span></p>
                             <p class="text-[9px] text-slate-600 font-black uppercase tracking-widest italic opacity-60">{{ $tx->created_at->diffForHumans() }}</p>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                             <td class="py-6 lg:py-10 px-3 lg:px-6">
                                 <div class="flex items-center space-x-4 lg:space-x-6">
                                     <div class="w-12 h-12 lg:w-14 lg:h-14 bg-slate-900 border border-white/5 rounded-2xl flex items-center justify-center text-white font-black italic shadow-lg shrink-0">
-                                        {{ strtoupper(substr($client->name, 0, 1)) }}
+                                        {{ strtoupper(substr((string)($client->name ?? 'U'), 0, 1)) }}
                                     </div>
                                     <div>
                                         <p class="text-[10px] lg:text-[11px] font-black text-white uppercase italic tracking-tighter mb-1 truncate max-w-[80px] sm:max-w-none md:max-w-none">{{ $client->name }}</p>

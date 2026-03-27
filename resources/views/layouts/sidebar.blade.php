@@ -117,7 +117,7 @@
                 <div class="flex items-center space-x-4 overflow-hidden">
                     <div class="relative shrink-0">
                         <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-2xl flex items-center justify-center text-white text-xl font-black italic shadow-2xl">
-                            {{ strtoupper(substr(Auth::user()?->name ?? 'Guest', 0, 1)) }}
+                            {{ strtoupper(substr((string)(Auth::user()?->name ?? 'Guest'), 0, 1)) }}
                         </div>
                         <div class="absolute -top-1 -right-1 w-4 h-4 {{ Auth::check() ? 'bg-emerald-500' : 'bg-slate-600' }} rounded-full border-[3px] border-slate-950 {{ Auth::check() ? 'animate-pulse' : '' }}"></div>
                     </div>
