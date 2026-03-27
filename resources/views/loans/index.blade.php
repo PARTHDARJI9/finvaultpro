@@ -43,9 +43,9 @@
                             <td class="py-6 px-8">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-[10px] font-bold text-white border border-white/10">
-                                        {{ strtoupper(substr($loan->client->name, 0, 1)) }}
+                                        {{ strtoupper(substr($loan->client?->name ?? 'G', 0, 1)) }}
                                     </div>
-                                    <span class="text-white font-bold">{{ $loan->client->name }}</span>
+                                    <span class="text-white font-bold">{{ $loan->client?->name ?? 'Guest client' }}</span>
                                 </div>
                             </td>
                             <td class="py-6 px-8">

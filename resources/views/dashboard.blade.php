@@ -103,13 +103,13 @@
                     <div class="flex items-start space-x-6 group transition-all">
                         <div class="shrink-0 relative">
                             <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-white/10 flex items-center justify-center text-white font-black italic shadow-xl group-hover:scale-110 transition-transform">
-                                {{ strtoupper(substr($tx->client->name, 0, 1)) }}
+                                {{ strtoupper(substr($tx->client?->name ?? 'G', 0, 1)) }}
                             </div>
                             <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-[3px] border-slate-950"></div>
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between mb-1">
-                                <p class="text-xs font-black text-white uppercase italic tracking-tighter truncate">{{ $tx->client->name }}</p>
+                                <p class="text-xs font-black text-white uppercase italic tracking-tighter truncate">{{ $tx->client?->name ?? 'Guest Client' }}</p>
                                 <p class="text-xs font-black text-emerald-400 italic font-mono">+₹{{ number_format($tx->amount) }}</p>
                             </div>
                             <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-2">via <span class="text-indigo-400 underline decoration-indigo-400/20">{{ $tx->payment_method ?? 'Unknown' }}</span></p>
@@ -165,14 +165,14 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="py-6 lg:py-10 px-3 lg:px-6 tabular-nums font-black text-[10px] text-indigo-400 italic tracking-[0.2em] uppercase hidden md:table-cell">{{ $client->loans->first()->loan_number ?? 'PRT-9001-X' }}</td>
+                            <td class="py-6 lg:py-10 px-3 lg:px-6 tabular-nums font-black text-[10px] text-indigo-400 italic tracking-[0.2em] uppercase hidden md:table-cell">{{ $client->loans->first()?->loan_number ?? 'PRT-9001-X' }}</td>
                             <td class="py-6 lg:py-10 px-3 lg:px-6 text-center hidden lg:table-cell">
                                 <span class="px-4 py-2 bg-emerald-500/10 text-emerald-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-emerald-500/20">
-                                    Tier {{ $client->credit_score > 750 ? 'A' : 'B' }}
+                                    Tier {{ ($client->credit_score ?? 0) > 750 ? 'A' : 'B' }}
                                 </span>
                             </td>
-                            <td class="py-6 lg:py-10 px-3 lg:px-6 font-black text-white text-[12px] lg:text-sm italic">₹{{ number_format($client->balance) }}</td>
-                            <td class="py-6 lg:py-10 px-3 lg:px-6 text-[10px] font-black text-slate-400 uppercase tracking-widest tabular-nums hidden sm:table-cell">{{ $client->loans->first()->next_due_date ?? 'N/A' }}</td>
+                            <td class="py-6 lg:py-10 px-3 lg:px-6 font-black text-white text-[12px] lg:text-sm italic">₹{{ number_format($client->balance ?? 0) }}</td>
+                            <td class="py-6 lg:py-10 px-3 lg:px-6 text-[10px] font-black text-slate-400 uppercase tracking-widest tabular-nums hidden sm:table-cell">{{ $client->loans->first()?->next_due_date ?? 'N/A' }}</td>
                             <td class="py-6 lg:py-10 px-3 lg:px-6 text-right">
                                 <div class="flex flex-col items-end space-y-2">
                                     <div class="h-1.5 w-12 lg:w-24 bg-white/5 rounded-full overflow-hidden border border-white/5">
