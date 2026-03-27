@@ -86,7 +86,7 @@
                     <p class="text-xs text-slate-500 font-bold uppercase tracking-widest mb-12">IDENTIFIED YIELD EVENTS</p>
 
                     <div class="space-y-6">
-                        @foreach(\App\Models\Transaction::where('category', 'repayment')->latest()->take(4)->get() as $tx)
+                        @foreach($transactions as $tx)
                         <div class="flex items-center justify-between p-4 bg-black/20 border border-white/5 rounded-2xl hover:bg-white/5 transition-all text-xs">
                             <div class="flex items-center space-x-4">
                                 <i class="fas fa-coins text-amber-400"></i>

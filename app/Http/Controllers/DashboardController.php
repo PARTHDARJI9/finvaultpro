@@ -41,6 +41,8 @@ class DashboardController extends Controller
                                     ->limit(5)
                                     ->get();
 
+            $clients = Client::with('loans')->take(5)->get();
+
         } catch (\Exception $e) {
             // "Parfect Live" Mock Data Protocol if DB is unavailable
             $stats = [
@@ -64,8 +66,13 @@ class DashboardController extends Controller
                 (object)['client' => (object)['name' => 'Sherlock Holmes'], 'category' => 'disbursement', 'amount' => 5000.00, 'status' => 'success', 'payment_method' => 'UPI', 'created_at' => now()->subHours(2)],
                 (object)['client' => (object)['name' => 'Bruce Wayne'], 'category' => 'repayment', 'amount' => 850.50, 'status' => 'pending', 'payment_method' => 'Cash', 'created_at' => now()->subDays(1)],
             ]);
+
+            $clients = collect([
+                (object)['name' => 'Tony Stark', 'phone' => '+91-9876543210', 'credit_score' => 800, 'balance' => 45000.00, 'loans' => collect([(object)['loan_number' => 'STARK-001', 'next_due_date' => '2026-04-01']])],
+                (object)['name' => 'Peter Parker', 'phone' => '+91-9876543211', 'credit_score' => 720, 'balance' => 1500.00, 'loans' => collect([(object)['loan_number' => 'WEB-042', 'next_due_date' => '2026-04-05']])],
+            ]);
         }
 
-        return view('dashboard', compact('stats', 'recoveryTrends', 'recentTransactions'));
+        return view('dashboard', compact('stats', 'recoveryTrends', 'recentTransactions', 'clients'));
     }
 }

@@ -152,7 +152,6 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-white/[0.03]">
-                        @php $clients = \App\Models\Client::with('loans')->take(5)->get(); @endphp
                         @forelse($clients as $client)
                         <tr class="group hover:bg-white/5 transition-all">
                             <td class="py-6 lg:py-10 px-3 lg:px-6">
