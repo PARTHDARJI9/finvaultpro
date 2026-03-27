@@ -117,12 +117,12 @@
                 <div class="flex items-center space-x-4 overflow-hidden">
                     <div class="relative shrink-0">
                         <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-2xl flex items-center justify-center text-white text-xl font-black italic shadow-2xl">
-                            {{ strtoupper(substr(Auth::user()->name ?? 'Guest', 0, 1)) }}
+                            {{ strtoupper(substr(Auth::user()?->name ?? 'Guest', 0, 1)) }}
                         </div>
                         <div class="absolute -top-1 -right-1 w-4 h-4 {{ Auth::check() ? 'bg-emerald-500' : 'bg-slate-600' }} rounded-full border-[3px] border-slate-950 {{ Auth::check() ? 'animate-pulse' : '' }}"></div>
                     </div>
                     <div class="truncate">
-                        <p class="text-[11px] font-black text-white truncate uppercase italic tracking-tighter mb-0.5">{{ Auth::user()->name ?? 'Institutional Guest' }}</p>
+                        <p class="text-[11px] font-black text-white truncate uppercase italic tracking-tighter mb-0.5">{{ Auth::user()?->name ?? 'Institutional Guest' }}</p>
                         <p class="text-[9px] text-slate-600 font-bold uppercase tracking-widest flex items-center">
                             <span class="w-1.5 h-1.5 {{ Auth::check() ? 'bg-indigo-500' : 'bg-slate-700' }} rounded-full mr-1.5 scale-75"></span> {{ Auth::check() ? 'Licensed Director' : 'Public Access' }}
                         </p>
