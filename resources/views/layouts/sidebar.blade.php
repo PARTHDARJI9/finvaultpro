@@ -117,24 +117,30 @@
                 <div class="flex items-center space-x-4 overflow-hidden">
                     <div class="relative shrink-0">
                         <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-2xl flex items-center justify-center text-white text-xl font-black italic shadow-2xl">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            {{ strtoupper(substr(Auth::user()->name ?? 'Guest', 0, 1)) }}
                         </div>
-                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-[3px] border-slate-950 animate-pulse"></div>
+                        <div class="absolute -top-1 -right-1 w-4 h-4 {{ Auth::check() ? 'bg-emerald-500' : 'bg-slate-600' }} rounded-full border-[3px] border-slate-950 {{ Auth::check() ? 'animate-pulse' : '' }}"></div>
                     </div>
                     <div class="truncate">
-                        <p class="text-[11px] font-black text-white truncate uppercase italic tracking-tighter mb-0.5">{{ Auth::user()->name }}</p>
+                        <p class="text-[11px] font-black text-white truncate uppercase italic tracking-tighter mb-0.5">{{ Auth::user()->name ?? 'Institutional Guest' }}</p>
                         <p class="text-[9px] text-slate-600 font-bold uppercase tracking-widest flex items-center">
-                            <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-1.5 scale-75"></span> Licensed Director
+                            <span class="w-1.5 h-1.5 {{ Auth::check() ? 'bg-indigo-500' : 'bg-slate-700' }} rounded-full mr-1.5 scale-75"></span> {{ Auth::check() ? 'Licensed Director' : 'Public Access' }}
                         </p>
                     </div>
                 </div>
                 
+                @if(Auth::check())
                 <form method="POST" action="{{ route('logout') }}" class="shrink-0">
                     @csrf
                     <button type="submit" class="w-12 h-12 rounded-2xl bg-white/5 hover:bg-rose-600/20 text-slate-600 hover:text-rose-500 border border-white/5 hover:border-rose-500/30 transition-all flex items-center justify-center group/logout active:scale-95">
                         <i class="fas fa-power-off text-sm group-hover/logout:rotate-90 transition-transform duration-500"></i>
                     </button>
                 </form>
+                @else
+                <a href="{{ route('login') }}" class="shrink-0 w-12 h-12 rounded-2xl bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/20 transition-all flex items-center justify-center active:scale-95">
+                    <i class="fas fa-right-to-bracket text-sm"></i>
+                </a>
+                @endif
             </div>
         </div>
     </aside>

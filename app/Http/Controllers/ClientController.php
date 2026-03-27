@@ -66,8 +66,8 @@ class ClientController extends Controller
         $customId = 'FIN-' . $nextIdNum;
 
         $clientData = [
-            'user_id' => Auth::id(),
-            'tenant_id' => Auth::user()->tenant_id ?? 1,
+            'user_id' => Auth::id() ?? 1,
+            'tenant_id' => Auth::user()?->tenant_id ?? 1,
             'custom_id' => $customId,
             'name' => $request->name,
             'email' => $request->email,
