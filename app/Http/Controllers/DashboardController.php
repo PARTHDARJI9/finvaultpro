@@ -60,9 +60,9 @@ class DashboardController extends Controller
             ]);
 
             $recentTransactions = collect([
-                (object)['client' => (object)['name' => 'John Wick'], 'category' => 'repayment', 'amount' => 1200.00, 'status' => 'success', 'created_at' => now()],
-                (object)['client' => (object)['name' => 'Sherlock Holmes'], 'category' => 'disbursement', 'amount' => 5000.00, 'status' => 'success', 'created_at' => now()->subHours(2)],
-                (object)['client' => (object)['name' => 'Bruce Wayne'], 'category' => 'repayment', 'amount' => 850.50, 'status' => 'pending', 'created_at' => now()->subDays(1)],
+                (object)['client' => (object)['name' => 'John Wick'], 'category' => 'repayment', 'amount' => 1200.00, 'status' => 'success', 'payment_method' => 'Bank Transfer', 'created_at' => now()],
+                (object)['client' => (object)['name' => 'Sherlock Holmes'], 'category' => 'disbursement', 'amount' => 5000.00, 'status' => 'success', 'payment_method' => 'UPI', 'created_at' => now()->subHours(2)],
+                (object)['client' => (object)['name' => 'Bruce Wayne'], 'category' => 'repayment', 'amount' => 850.50, 'status' => 'pending', 'payment_method' => 'Cash', 'created_at' => now()->subDays(1)],
             ]);
         }
 

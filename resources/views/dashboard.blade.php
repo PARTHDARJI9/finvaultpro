@@ -112,7 +112,7 @@
                                 <p class="text-xs font-black text-white uppercase italic tracking-tighter truncate">{{ $tx->client->name }}</p>
                                 <p class="text-xs font-black text-emerald-400 italic font-mono">+₹{{ number_format($tx->amount) }}</p>
                             </div>
-                            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-2">via <span class="text-indigo-400 underline decoration-indigo-400/20">{{ $tx->payment_method }}</span></p>
+                            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-2">via <span class="text-indigo-400 underline decoration-indigo-400/20">{{ $tx->payment_method ?? 'Unknown' }}</span></p>
                             <p class="text-[9px] text-slate-600 font-black uppercase tracking-widest italic opacity-60">{{ $tx->created_at->diffForHumans() }}</p>
                         </div>
                     </div>

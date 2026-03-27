@@ -140,7 +140,7 @@
                                 @forelse($client->transactions as $tx)
                                 <tr class="group hover:bg-white/5 transition-all">
                                     <td class="py-10 px-12 tabular-nums text-[10px] font-black text-slate-400 italic">25 MAR 2026 - {{ $tx->created_at->format('H:i') }}</td>
-                                    <td class="py-10 px-6 text-[11px] font-black text-white uppercase italic tracking-tighter">Settlement via {{ $tx->payment_method }}</td>
+                                    <td class="py-10 px-6 text-[11px] font-black text-white uppercase italic tracking-tighter">Settlement via {{ $tx->payment_method ?? 'Unknown' }}</td>
                                     <td class="py-10 px-6 text-center text-[10px] font-bold text-slate-600 uppercase tracking-widest">TXN-{{ $tx->id }}</td>
                                     <td class="py-10 px-6 text-right font-black text-emerald-400 text-sm italic font-mono">+₹{{ number_format($tx->amount) }}</td>
                                 </tr>

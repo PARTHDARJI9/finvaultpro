@@ -92,7 +92,7 @@
                                 <i class="fas fa-coins text-amber-400"></i>
                                 <div>
                                     <p class="font-bold text-white tracking-widest">{{ $tx->client->name }} <span class="text-slate-600 font-normal select-none">|</span> Settlement</p>
-                                    <p class="text-[9px] text-slate-600 uppercase mt-0.5">{{ $tx->created_at->diffForHumans() }} via {{ $tx->payment_method }}</p>
+                                    <p class="text-[9px] text-slate-600 uppercase mt-0.5">{{ $tx->created_at->diffForHumans() }} via {{ $tx->payment_method ?? 'Unknown' }}</p>
                                 </div>
                             </div>
                             <div class="text-right">
