@@ -129,18 +129,9 @@
                     </div>
                 </div>
                 
-                @if(Auth::check())
-                <form method="POST" action="{{ route('logout') }}" class="shrink-0">
-                    @csrf
-                    <button type="submit" class="w-12 h-12 rounded-2xl bg-white/5 hover:bg-rose-600/20 text-slate-600 hover:text-rose-500 border border-white/5 hover:border-rose-500/30 transition-all flex items-center justify-center group/logout active:scale-95">
-                        <i class="fas fa-power-off text-sm group-hover/logout:rotate-90 transition-transform duration-500"></i>
-                    </button>
-                </form>
-                @else
-                <a href="{{ route('login') }}" class="shrink-0 w-12 h-12 rounded-2xl bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/20 transition-all flex items-center justify-center active:scale-95">
-                    <i class="fas fa-right-to-bracket text-sm"></i>
-                </a>
-                @endif
+                <div class="shrink-0 w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-slate-700 shadow-inner">
+                    <i class="fas fa-microchip text-sm opacity-20"></i>
+                </div>
             </div>
         </div>
     </aside>
